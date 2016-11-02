@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6723EF0B1DC8D9E40001B8AD /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6723EF0A1DC8D9E40001B8AD /* logo.jpg */; };
 		6723EF0D1DC8DC150001B8AD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6723EF0C1DC8DC150001B8AD /* LoginViewController.swift */; };
 		6723EF131DC8E00A0001B8AD /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6723EF121DC8E00A0001B8AD /* HomeViewController.swift */; };
 		6723EF151DC8F5020001B8AD /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6723EF141DC8F5020001B8AD /* TableViewCell.swift */; };
 		6723EF171DC9543A0001B8AD /* AddInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6723EF161DC9543A0001B8AD /* AddInformationViewController.swift */; };
+		674220AC1DC967B900276E2A /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 674220AB1DC967B900276E2A /* logo.jpg */; };
 		67ABFCC21DC83B5900B9B77F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67ABFCC11DC83B5900B9B77F /* AppDelegate.swift */; };
 		67ABFCC71DC83B5900B9B77F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67ABFCC51DC83B5900B9B77F /* Main.storyboard */; };
 		67ABFCCA1DC83B5900B9B77F /* CourtKing.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 67ABFCC81DC83B5900B9B77F /* CourtKing.xcdatamodeld */; };
@@ -39,11 +39,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6723EF0A1DC8D9E40001B8AD /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = logo.jpg; path = ../../logo.jpg; sourceTree = "<group>"; };
 		6723EF0C1DC8DC150001B8AD /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		6723EF121DC8E00A0001B8AD /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		6723EF141DC8F5020001B8AD /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		6723EF161DC9543A0001B8AD /* AddInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddInformationViewController.swift; sourceTree = "<group>"; };
+		674220AB1DC967B900276E2A /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.jpg; sourceTree = "<group>"; };
 		67ABFCBE1DC83B5900B9B77F /* CourtKing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CourtKing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67ABFCC11DC83B5900B9B77F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		67ABFCC61DC83B5900B9B77F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -112,7 +112,7 @@
 				67ABFCCB1DC83B5900B9B77F /* Assets.xcassets */,
 				67ABFCCD1DC83B5900B9B77F /* LaunchScreen.storyboard */,
 				67ABFCD01DC83B5900B9B77F /* Info.plist */,
-				6723EF0A1DC8D9E40001B8AD /* logo.jpg */,
+				674220AB1DC967B900276E2A /* logo.jpg */,
 				67ABFCC81DC83B5900B9B77F /* CourtKing.xcdatamodeld */,
 				6723EF0C1DC8DC150001B8AD /* LoginViewController.swift */,
 				6723EF121DC8E00A0001B8AD /* HomeViewController.swift */,
@@ -250,7 +250,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6723EF0B1DC8D9E40001B8AD /* logo.jpg in Resources */,
+				674220AC1DC967B900276E2A /* logo.jpg in Resources */,
 				67ABFCCF1DC83B5900B9B77F /* LaunchScreen.storyboard in Resources */,
 				67ABFCCC1DC83B5900B9B77F /* Assets.xcassets in Resources */,
 				67ABFCC71DC83B5900B9B77F /* Main.storyboard in Resources */,
