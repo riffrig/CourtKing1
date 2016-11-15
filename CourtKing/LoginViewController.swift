@@ -10,6 +10,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,6 +22,20 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+//    override func viewDidLayoutSubviews() {
+//        let scrollViewBounds = scrollView.bounds
+//        _ = contentView.bounds
+//        
+//        var scrollViewInsets = UIEdgeInsets.zero
+//        scrollViewInsets.top = scrollViewBounds.size.height/2.0;
+//        scrollViewInsets.top -= contentView.bounds.size.height/2.0;
+//        
+//        scrollViewInsets.bottom = scrollViewBounds.size.height/2.0
+//        scrollViewInsets.bottom -= contentView.bounds.size.height/2.0;
+//        scrollViewInsets.bottom += 1
+//        
+//        scrollView.contentInset = scrollViewInsets
+//    }
 
     /*
     // MARK: - Navigation

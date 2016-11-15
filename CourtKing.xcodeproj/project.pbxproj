@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		670A92BE1DD1617A0022D3B7 /* ReserveGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670A92BD1DD1617A0022D3B7 /* ReserveGameViewController.swift */; };
+		670A92C01DD16B1C0022D3B7 /* ReservationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670A92BF1DD16B1C0022D3B7 /* ReservationCell.swift */; };
+		670A92C21DD16C2B0022D3B7 /* AddGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670A92C11DD16C2A0022D3B7 /* AddGameViewController.swift */; };
 		6723EF0D1DC8DC150001B8AD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6723EF0C1DC8DC150001B8AD /* LoginViewController.swift */; };
-		6723EF131DC8E00A0001B8AD /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6723EF121DC8E00A0001B8AD /* HomeViewController.swift */; };
-		6723EF151DC8F5020001B8AD /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6723EF141DC8F5020001B8AD /* TableViewCell.swift */; };
-		6723EF171DC9543A0001B8AD /* AddInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6723EF161DC9543A0001B8AD /* AddInformationViewController.swift */; };
 		674220AC1DC967B900276E2A /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 674220AB1DC967B900276E2A /* logo.jpg */; };
 		67ABFCC21DC83B5900B9B77F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67ABFCC11DC83B5900B9B77F /* AppDelegate.swift */; };
 		67ABFCC71DC83B5900B9B77F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67ABFCC51DC83B5900B9B77F /* Main.storyboard */; };
@@ -39,10 +39,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		670A92BD1DD1617A0022D3B7 /* ReserveGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReserveGameViewController.swift; sourceTree = "<group>"; };
+		670A92BF1DD16B1C0022D3B7 /* ReservationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationCell.swift; sourceTree = "<group>"; };
+		670A92C11DD16C2A0022D3B7 /* AddGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGameViewController.swift; sourceTree = "<group>"; };
 		6723EF0C1DC8DC150001B8AD /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		6723EF121DC8E00A0001B8AD /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		6723EF141DC8F5020001B8AD /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
-		6723EF161DC9543A0001B8AD /* AddInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddInformationViewController.swift; sourceTree = "<group>"; };
 		674220AB1DC967B900276E2A /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.jpg; sourceTree = "<group>"; };
 		67ABFCBE1DC83B5900B9B77F /* CourtKing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CourtKing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67ABFCC11DC83B5900B9B77F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +87,7 @@
 		67ABFCB51DC83B5900B9B77F = {
 			isa = PBXGroup;
 			children = (
+				67ABFCC81DC83B5900B9B77F /* CourtKing.xcdatamodeld */,
 				67ABFCC01DC83B5900B9B77F /* CourtKing */,
 				67ABFCD81DC83B5900B9B77F /* CourtKingTests */,
 				67ABFCE31DC83B5900B9B77F /* CourtKingUITests */,
@@ -113,11 +114,10 @@
 				67ABFCCD1DC83B5900B9B77F /* LaunchScreen.storyboard */,
 				67ABFCD01DC83B5900B9B77F /* Info.plist */,
 				674220AB1DC967B900276E2A /* logo.jpg */,
-				67ABFCC81DC83B5900B9B77F /* CourtKing.xcdatamodeld */,
 				6723EF0C1DC8DC150001B8AD /* LoginViewController.swift */,
-				6723EF121DC8E00A0001B8AD /* HomeViewController.swift */,
-				6723EF141DC8F5020001B8AD /* TableViewCell.swift */,
-				6723EF161DC9543A0001B8AD /* AddInformationViewController.swift */,
+				670A92BD1DD1617A0022D3B7 /* ReserveGameViewController.swift */,
+				670A92BF1DD16B1C0022D3B7 /* ReservationCell.swift */,
+				670A92C11DD16C2A0022D3B7 /* AddGameViewController.swift */,
 			);
 			path = CourtKing;
 			sourceTree = "<group>";
@@ -278,12 +278,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6723EF151DC8F5020001B8AD /* TableViewCell.swift in Sources */,
+				670A92C21DD16C2B0022D3B7 /* AddGameViewController.swift in Sources */,
 				6723EF0D1DC8DC150001B8AD /* LoginViewController.swift in Sources */,
+				670A92C01DD16B1C0022D3B7 /* ReservationCell.swift in Sources */,
 				67ABFCCA1DC83B5900B9B77F /* CourtKing.xcdatamodeld in Sources */,
-				6723EF171DC9543A0001B8AD /* AddInformationViewController.swift in Sources */,
 				67ABFCC21DC83B5900B9B77F /* AppDelegate.swift in Sources */,
-				6723EF131DC8E00A0001B8AD /* HomeViewController.swift in Sources */,
+				670A92BE1DD1617A0022D3B7 /* ReserveGameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -565,7 +565,8 @@
 				67ABFCC91DC83B5900B9B77F /* CourtKing.xcdatamodel */,
 			);
 			currentVersion = 67ABFCC91DC83B5900B9B77F /* CourtKing.xcdatamodel */;
-			path = CourtKing.xcdatamodeld;
+			name = CourtKing.xcdatamodeld;
+			path = CourtKing/CourtKing.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

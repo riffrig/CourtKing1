@@ -8,23 +8,23 @@
 
 import UIKit
 
-class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class HomeViewController: UIViewController {
 
-    @IBOutlet weak var mySegmentedControl: UISegmentedControl!
+    /*@IBOutlet weak var mySegmentedControl: UISegmentedControl!
     @IBOutlet weak var myTableView: UITableView!
     
-    let court1:[String] = ["private 1", "private 2"]
+    let court1:[String] = ["private 1", "private 2", "test", "help", "please", "let", "me", "scroll", "the", "table"]
     let court2:[String] = ["shit", "ass"]
     let court3:[String] = ["blues","deez nuts"]
     let court4:[String] = ["a;sldkfjadsl;fjkassd;flkasd;fljksf"]
     
     @IBAction func logoutButtonTapped(_ sender: Any) {
-        
+   
     }
-    
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
-        myTableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
+        //myTableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
         
 
         // Do any additional setup after loading the view.
@@ -34,7 +34,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    /*
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         var returnValue = 0
@@ -98,7 +98,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBAction func segmentedControlActionChange(_ sender: Any) {
         myTableView.reloadData()
     
-    }
+    }*/
     
 
     /*
