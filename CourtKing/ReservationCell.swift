@@ -23,9 +23,7 @@ class ReservationCell: UITableViewCell {
     
     @IBOutlet weak var teammate3: UILabel!
     
-    @IBOutlet weak var teammate4: UILabel!
-
-    
+    @IBOutlet weak var teammate4: UILabel!    
     
     
     override func awakeFromNib() {

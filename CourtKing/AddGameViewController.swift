@@ -57,12 +57,12 @@ class AddGameViewController: UIViewController, UITextFieldDelegate {
         
         guard let managedObjectContext = managedObjectContext else {return}
         
-        //create quote or update if already exists
+        //create team or update if already exists
         if team == nil {
-            //create quote
+            //create team
             let newTeam = Team(context: managedObjectContext)
             
-            //configureQuote
+            //configureTeam
             newTeam.createdAt = Date().timeIntervalSince1970
             
             //set team
@@ -70,13 +70,14 @@ class AddGameViewController: UIViewController, UITextFieldDelegate {
         }
         
         if team == team {
-            //configure Quote
+            //configure Team
             team?.teamName = teamName.text
             team?.teamCaptain = teamCaptain.text
             team?.teamMember1 = teammate1.text
             team?.teamMember2 = teammate2.text
             team?.teamMember3 = teammate3.text
             team?.teamMember4 = teammate4.text
+           // team?.createdAt = Date().timeIntervalSince1970
 
         }
         

@@ -17,6 +17,13 @@ class ReserveGameViewController: UIViewController {
     
     @IBOutlet weak var mySegmentedControl: UISegmentedControl!
     
+    @IBOutlet weak var team1Button: UIButton!
+    
+    @IBOutlet weak var vsButton: UIButton!
+    
+    @IBOutlet weak var team2Button: UIButton!
+    
+    @IBOutlet weak var reserveGameButton: UIButton!
     
     private let persistentContainer = NSPersistentContainer(name: "CourtKing")
     
@@ -71,10 +78,19 @@ class ReserveGameViewController: UIViewController {
         
         if let games = fetchedResultsController.fetchedObjects {
             hasGames = games.count > 0
+            
         }
-        
+
         tableView.isHidden = !hasGames
+        team1Button.isHidden = !hasGames
+        team2Button.isHidden = !hasGames
+        vsButton.isHidden = !hasGames
+        
+        //reserveGameButton.center = self.view.center = !hasGames
+
         messageLabel.isHidden = hasGames
+
+        
         
     }
     
@@ -130,6 +146,13 @@ class ReserveGameViewController: UIViewController {
         //fetch quote
         let team = fetchedResultsController.object(at: indexPath)
         
+        /*let todaysDate:NSDate = NSDate()
+        let dateFormatter:DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
+        let DateInFormat:String = dateFormatter.string(from: todaysDate as Date)
+        print(DateInFormat)*/
+        
+        
         //configure cell
         cell.teamName.text = team.teamName
         cell.teamCaptain.text = team.teamCaptain
@@ -137,7 +160,10 @@ class ReserveGameViewController: UIViewController {
         cell.teammate2.text = team.teamMember2
         cell.teammate3.text = team.teamMember3
         cell.teammate4.text = team.teamMember4
-
+        //cell.dateCreated.text = DateInFormat
+        
+        
+        
     }
 
 
