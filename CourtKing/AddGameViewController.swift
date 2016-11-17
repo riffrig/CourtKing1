@@ -23,6 +23,8 @@ class AddGameViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var teammate4: UITextField!
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     var managedObjectContext: NSManagedObjectContext?
     
     var team: Team?
@@ -84,6 +86,20 @@ class AddGameViewController: UIViewController, UITextFieldDelegate {
         
         //pop view controller
         _ = navigationController?.popViewController(animated: true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        scrollView.setContentOffset(CGPoint.init(x: 0, y: 250), animated: true)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        scrollView.setContentOffset(CGPoint.init(x: 0, y: 0), animated: true)
     }
 
     
