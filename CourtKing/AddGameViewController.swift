@@ -33,7 +33,7 @@ class AddGameViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         
-        title = "Add Information"
+        title = "Add Team Information"
         
         if let team = team {
             title = "Edit Team"
