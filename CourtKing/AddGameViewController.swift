@@ -95,7 +95,7 @@ class AddGameViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        scrollView.setContentOffset(CGPoint.init(x: 0, y: 250), animated: true)
+        scrollView.setContentOffset(CGPoint.init(x: 0, y: 200), animated: true)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {

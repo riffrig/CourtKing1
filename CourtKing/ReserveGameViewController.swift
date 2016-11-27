@@ -32,7 +32,7 @@ class ReserveGameViewController: UIViewController {
     public var courtSelected = 0
     
     @IBAction func segmentChanged(_ sender: Any) {
-                
+        
         switch(self.mySegmentedControl.selectedSegmentIndex)
         {
             case 0:
@@ -66,6 +66,7 @@ class ReserveGameViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         let attr = NSDictionary(object: UIFont(name: "HelveticaNeue-Bold", size: 20.0)!, forKey: NSFontAttributeName as NSCopying)
         mySegmentedControl.setTitleTextAttributes(attr as [NSObject : AnyObject] , for: .normal)
@@ -136,7 +137,6 @@ class ReserveGameViewController: UIViewController {
         
         
     }
-    
     //make nsfetchedResultsController 
     //set sorting by date created
     fileprivate lazy var fetchedResultsController: NSFetchedResultsController<Team> = {
@@ -144,6 +144,7 @@ class ReserveGameViewController: UIViewController {
         let fetchRequest: NSFetchRequest<Team> = Team.fetchRequest()
         
         //configure fetch request
+        
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
         
         //create fetched results controller
@@ -189,7 +190,7 @@ class ReserveGameViewController: UIViewController {
     
     //used to help update tableview
     func configure(_ cell: ReservationCell, at indexPath: IndexPath) {
-        //fetch quote
+        //fetch team
         let team = fetchedResultsController.object(at: indexPath)
         
         /*let todaysDate:NSDate = NSDate()
@@ -197,7 +198,6 @@ class ReserveGameViewController: UIViewController {
         dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
         let DateInFormat:String = dateFormatter.string(from: todaysDate as Date)
         print(DateInFormat)*/
-        
         
         //configure cell
         
@@ -207,6 +207,34 @@ class ReserveGameViewController: UIViewController {
         cell.teammate2.text = team.teamMember2
         cell.teammate3.text = team.teamMember3
         cell.teammate4.text = team.teamMember4
+        
+        
+       if (indexPath.row == 0)
+        {
+            team1Button.setTitle(cell.teamName.text, for: .normal)
+            
+            cell.contentView.backgroundColor = UIColor(red: 59.0/255.0, green: 86.0/255.0, blue: 241.0/255.0, alpha:1.0)
+           
+           // cell.contentView.backgroundColor = UIColor.init(red: 59, green: 86, blue: 241, alpha: 1.0)
+        }
+        
+        if (indexPath.row == 1)
+        {
+            print("IN ROW 1")
+            team2Button.setTitle(cell.teamName.text, for: .normal)
+            
+            cell.contentView.backgroundColor = UIColor(red: 57.0/255.0, green: 241.0/255.0, blue: 59.0/255.0, alpha:1.0)
+            
+        }
+        print("NUM ROWS ")
+        print(tableView.numberOfRows(inSection: 0))
+        
+        if (tableView.numberOfRows(inSection: 0) == 1)
+        {
+            print ("got into reset button 2")
+            team2Button.setTitle("Empty", for: .normal)
+            team2Button.reloadInputViews()
+        }
         
        // team1Button.setTitle(team.teamName, for: .normal)
         //cell.dateCreated.text = DateInFormat
@@ -219,6 +247,42 @@ class ReserveGameViewController: UIViewController {
 }
 
 extension ReserveGameViewController: UITableViewDataSource {
+    
+    
+   /* func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    
+        if (indexPath.row == 0)
+        {
+            cell.contentView.backgroundColor = UIColor.cyan
+            //cell.backgroundColor = UIColor.init(red: 59, green: 86, blue: 241, alpha: 1.0)
+        }
+        
+        if (indexPath.row == 1)
+        {
+            cell.contentView.backgroundColor = UIColor.blue
+            //self.cell.backgroundColor = UIColor.init(red: 59, green: 86, blue: 241, alpha: 1.0)
+            
+        }
+    
+    }*/
+
+    
+    private func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        
+        let declareWinner = UITableViewRowAction(style: .normal, title: "WINNER!") { action, index in print("Winner button tapped")
+        }
+        
+        declareWinner.backgroundColor = UIColor.blue
+        
+        let declareLoser = UITableViewRowAction(style: .normal, title: "LOSER!") { action, index in print("Loser button tapped")
+        }
+        
+        declareLoser.backgroundColor = UIColor.blue
+            
+        return [declareWinner, declareLoser]
+    }
+
+    
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -257,6 +321,25 @@ extension ReserveGameViewController: UITableViewDataSource {
         }
         
         configure(cell, at: indexPath)
+        
+        
+        if (indexPath.row == 0)
+        {
+            
+            cell.contentView.backgroundColor = UIColor(red: 59.0/255.0, green: 86.0/255.0, blue: 241.0/255.0, alpha:1.0)
+            
+            // cell.contentView.backgroundColor = UIColor.init(red: 59, green: 86, blue: 241, alpha: 1.0)
+        }
+        else if (indexPath.row == 1)
+        {
+            cell.contentView.backgroundColor = UIColor(red: 57.0/255.0, green: 241.0/255.0, blue: 59.0/255.0, alpha:1.0)
+        }
+        else
+        {
+            cell.contentView.backgroundColor = UIColor.clear
+        }
+        
+        
         return cell
         //use enum to change variable based on the segment selected
         //then in ibaction for segmented control make sure you check the value and then
@@ -299,6 +382,7 @@ extension ReserveGameViewController: UITableViewDataSource {
             //delete quote
             team.managedObjectContext?.delete(team)
         }
+        
     }
     
 
@@ -334,14 +418,22 @@ extension ReserveGameViewController: NSFetchedResultsControllerDelegate {
         case .delete:
             if let indexPath = indexPath {
                 tableView.deleteRows(at: [indexPath], with: .fade)
+                tableView.reloadData()
+                team1Button.reloadInputViews()
+                team2Button.reloadInputViews()
+                
             }
             break
             
-        case .update:
+        case .move:
+            break
+        
+            
+        /*case .update:
             if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) as? ReservationCell {
                 //configure(cell, at: indexPath, team)
             }
-            break
+            break*/
             
         default:
             print("...")
