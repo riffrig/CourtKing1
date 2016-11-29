@@ -29,8 +29,25 @@ class ReserveGameViewController: UIViewController {
     
     private let segueAddGameViewController = "SegueAddGameViewController"
     
+    var managedObjectContext: NSManagedObjectContext?
+    
     public var courtSelected = 0
     
+    
+    @IBAction func popoverOne(_ sender: Any) {
+        
+        let popoverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "popoverID") as! popoverViewController
+        self.addChildViewController(popoverVC)
+        popoverVC.view.frame = self.view.frame
+        self.view.addSubview(popoverVC.view)
+        popoverVC.didMove(toParentViewController: self)
+        
+        
+    }
+    
+    
+    
+    //Action for when the segmented control is changed
     @IBAction func segmentChanged(_ sender: Any) {
         
         switch(self.mySegmentedControl.selectedSegmentIndex)
@@ -38,39 +55,50 @@ class ReserveGameViewController: UIViewController {
             case 0:
                 courtSelected = 0
                 self.tableView.reloadData()
-                messageLabel.text = "Court 1"
-                print("Court 0")
+                messageLabel.text = "No Reservations on Court 7"
                 break
             case 1:
                 courtSelected = 1
                 self.tableView.reloadData()
-                messageLabel.text = "Court 2"
-                print("Court 1")
+                messageLabel.text = "No Reservations on Court 8"
                 break
             case 2:
                 courtSelected = 2
                 self.tableView.reloadData()
-                messageLabel.text = "Court 3"
-                print("Court 2")
+                messageLabel.text = "No Reservations on Court 9"
                 break
             case 3:
                 courtSelected = 3
                 self.tableView.reloadData()
-                messageLabel.text = "Court 4"
-                print("Court 3")
+                messageLabel.text = "No Reservations on Court 10"
                 break
             default:
                 break
             
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.reloadData()
+        tableView.allowsSelection = false
+        vsButton.isEnabled = false
+        
+        //Add logo in the top left corner of the navigation bar
+        let button = UIButton.init(type: .custom)
+        button.setImage(UIImage.init(named: "logo.jpg"), for: UIControlState.normal)
+        button.addTarget(self, action:Selector(("callMethod")), for: UIControlEvents.touchDragInside)
+        button.frame = CGRect.init(x: 0, y: 0, width: 30, height: 30) //CGRectMake(0, 0, 30, 30)
+        let barButton = UIBarButtonItem.init(customView: button)
+        self.navigationItem.leftBarButtonItem = barButton
         
         
+        //Giving segmented control segments attributes and bold text
         let attr = NSDictionary(object: UIFont(name: "HelveticaNeue-Bold", size: 20.0)!, forKey: NSFontAttributeName as NSCopying)
         mySegmentedControl.setTitleTextAttributes(attr as [NSObject : AnyObject] , for: .normal)
         
+        //Set up persistent store for core data
+        //Update view accordingly and perform fetches
         persistentContainer.loadPersistentStores { (NSPersistentStoreDescription, error) in
             if let error = error {
                 print("Unable to load Persistent Store")
@@ -94,7 +122,7 @@ class ReserveGameViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector (applicationDidEnterBackground(_:)), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
     }
 
-
+    //default method
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -103,14 +131,14 @@ class ReserveGameViewController: UIViewController {
     //setup view with message label which changes as reservations are added
     private func setupView() {
         setupMessageLabel()
-        
-        
         updateView()
     }
     
-    //whenever no reservations, the label will display this
+    //Setting up message label
+    //will be displayed when there are no Games reserved on any court
     private func setupMessageLabel() {
         messageLabel.text = "No Games Reserved Currently."
+        tableView.reloadData()
     }
     
     //update view
@@ -137,14 +165,14 @@ class ReserveGameViewController: UIViewController {
         
         
     }
+    
     //make nsfetchedResultsController 
-    //set sorting by date created
+    //create fetch request for "Team" Core data entity and create sort descriptors for table view
     fileprivate lazy var fetchedResultsController: NSFetchedResultsController<Team> = {
         //create fetch request
         let fetchRequest: NSFetchRequest<Team> = Team.fetchRequest()
         
         //configure fetch request
-        
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
         
         //create fetched results controller
@@ -156,18 +184,13 @@ class ReserveGameViewController: UIViewController {
         return fetchedResultsController
     }()
     
-    //prepare for segue to the add team info page
+    //prepare for segue to the add team information page
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         guard let destinationViewController = segue.destination as? AddGameViewController else {return}
         
         //configure view controller
         destinationViewController.managedObjectContext = persistentContainer.viewContext
-        
-        /*if let indexPath = tableView.indexPathForSelectedRow, segue.identifier == segueEditQuoteViewController {
-            //configure view controller
-            destinationViewController.quote = fetchedResultsController.object(at: indexPath)
-        }*/
         
         if segue.identifier == segueAddGameViewController {
             if let destinationViewController = segue.destination as? AddGameViewController {
@@ -212,26 +235,18 @@ class ReserveGameViewController: UIViewController {
        if (indexPath.row == 0)
         {
             team1Button.setTitle(cell.teamName.text, for: .normal)
-            
-            cell.contentView.backgroundColor = UIColor(red: 59.0/255.0, green: 86.0/255.0, blue: 241.0/255.0, alpha:1.0)
-           
-           // cell.contentView.backgroundColor = UIColor.init(red: 59, green: 86, blue: 241, alpha: 1.0)
         }
         
         if (indexPath.row == 1)
         {
-            print("IN ROW 1")
             team2Button.setTitle(cell.teamName.text, for: .normal)
             
-            cell.contentView.backgroundColor = UIColor(red: 57.0/255.0, green: 241.0/255.0, blue: 59.0/255.0, alpha:1.0)
-            
         }
-        print("NUM ROWS ")
+        
         print(tableView.numberOfRows(inSection: 0))
         
         if (tableView.numberOfRows(inSection: 0) == 1)
         {
-            print ("got into reset button 2")
             team2Button.setTitle("Empty", for: .normal)
             team2Button.reloadInputViews()
         }
@@ -242,10 +257,18 @@ class ReserveGameViewController: UIViewController {
         
         
     }
+    
+    //trying to unwind segue on back button
+    @IBAction func unwindSegue(_ sender: UIStoryboardSegue) {
+        
+        self.performSegue(withIdentifier: "unwindSegue", sender: self)
+    }
+
 
 
 }
 
+//Extension of View Controller to allow The table view to communicate with the datasource
 extension ReserveGameViewController: UITableViewDataSource {
     
     
@@ -267,6 +290,7 @@ extension ReserveGameViewController: UITableViewDataSource {
     }*/
 
     
+    //trying to add slide options to declare winner of the game
     private func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
         let declareWinner = UITableViewRowAction(style: .normal, title: "WINNER!") { action, index in print("Winner button tapped")
@@ -284,27 +308,8 @@ extension ReserveGameViewController: UITableViewDataSource {
 
     
 
+    //returns the number of rows in the table view based on the number of reservations
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        //let teams = fetchedResultsController.fetchedObjects
-        
-        /*switch (mySegmentedControl.selectedSegmentIndex)
-        {
-        case 0:
-            guard let teams = fetchedResultsController.fetchedObjects else {return 0}
-            return teams.count
-        case 1:
-            guard let teams = fetchedResultsController.fetchedObjects else {return 0}
-            return teams.count
-        case 2:
-            guard let teams = fetchedResultsController.fetchedObjects else {return 0}
-            return teams.count
-        case 3:
-            guard let teams = fetchedResultsController.fetchedObjects else {return 0}
-            return teams.count
-        default:
-            break
-        }*/
         
         guard let teams = fetchedResultsController.fetchedObjects else {return 0}
         //return teams.count
@@ -322,21 +327,24 @@ extension ReserveGameViewController: UITableViewDataSource {
         
         configure(cell, at: indexPath)
         
-        
+        //setting colors to match up with the team name colors in the view
         if (indexPath.row == 0)
         {
-            
-            cell.contentView.backgroundColor = UIColor(red: 59.0/255.0, green: 86.0/255.0, blue: 241.0/255.0, alpha:1.0)
-            
-            // cell.contentView.backgroundColor = UIColor.init(red: 59, green: 86, blue: 241, alpha: 1.0)
+            cell.contentView.backgroundColor = UIColor.black
+            cell.teamName.textColor = UIColor.white
+            cell.teamCaptain.textColor = UIColor.white
+            cell.teammate1.textColor = UIColor.white
+            cell.teammate2.textColor = UIColor.white
+            cell.teammate3.textColor = UIColor.white
+            cell.teammate4.textColor = UIColor.white
         }
         else if (indexPath.row == 1)
         {
-            cell.contentView.backgroundColor = UIColor(red: 57.0/255.0, green: 241.0/255.0, blue: 59.0/255.0, alpha:1.0)
+            cell.contentView.backgroundColor = UIColor(red: 185/255.0, green: 185.0/255.0, blue: 185.0/255.0, alpha: 1.0)
         }
         else
         {
-            cell.contentView.backgroundColor = UIColor.clear
+            cell.contentView.backgroundColor = UIColor.white
         }
         
         
@@ -344,32 +352,6 @@ extension ReserveGameViewController: UITableViewDataSource {
         //use enum to change variable based on the segment selected
         //then in ibaction for segmented control make sure you check the value and then
         //make sure you reload tableview data
-        
-        
-       /* switch (courtSelected)
-        {
-            case 0:
-                configure(cell, at: indexPath)
-                return cell
-            case 1:
-                configure(cell, at: indexPath)
-                return cell
-            case 2:
-                configure(cell, at: indexPath)
-                return cell
-            case 3:
-                configure(cell, at: indexPath)
-                return cell
-            default:
-                break
-            
-        }*/
-        /*//fetch quote
-         let quote = fetchedResultsController.object(at: indexPath)
-         
-         //configure cell
-         cell.authorLabel.text = quote.author
-         cell.contentsLabel.text = quote.contents*/
         
     }
     
@@ -389,13 +371,15 @@ extension ReserveGameViewController: UITableViewDataSource {
 
 }
 
+//NSfetchedResultsController extension of view controller
 extension ReserveGameViewController: NSFetchedResultsControllerDelegate {
 
+    //starts updates for table view whenever controller is used to fetch
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }
     
-    
+    //ends updates for table view wheneber the content has changed and then view is updated
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
         
@@ -403,8 +387,7 @@ extension ReserveGameViewController: NSFetchedResultsControllerDelegate {
     }
     
     //inserting into the fetched controller
-    //deleting inserts
-    //if cell is clicked, update
+    //deleting inserts in the table view also
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch(type) {
             

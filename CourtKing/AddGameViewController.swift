@@ -55,37 +55,68 @@ class AddGameViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    //Action that saves the team information to the table view in core data
     @IBAction func save(sender: UIBarButtonItem) {
         
         guard let managedObjectContext = managedObjectContext else {return}
         
-        //create team or update if already exists
-        if team == nil {
-            //create team
-            let newTeam = Team(context: managedObjectContext)
+        
+        //checking if the user doesn't input all the necessary fields
+        if (teamName.text == "")
+        {
+            let alert = UIAlertController(title: "Alert", message: "You need a team name.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        else if (teamCaptain.text == "")
+        {
+            let alert = UIAlertController(title: "Alert", message: "You need a team captain.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        else if (teammate1.text == "" || teammate2.text == "" || teammate3.text == "" || teammate4.text == "")
+        {
+            let alert = UIAlertController(title: "Alert", message: "Please Add all teammates.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    
+        //if all the fields are populated, successfully create a new team in core data
+        //configure it and then add it to the table view on the previous page
+        else
+        {
+            //create team or update if already exists
+            if team == nil {
+                //create team
+                let newTeam = Team(context: managedObjectContext)
+                
+                //configureTeam
+                newTeam.createdAt = Date().timeIntervalSince1970
+                
+                //set team
+                team = newTeam
+            }
             
-            //configureTeam
-            newTeam.createdAt = Date().timeIntervalSince1970
+            if team == team {
+                //configure Team
+                team?.teamName = teamName.text
+                team?.teamCaptain = teamCaptain.text
+                team?.teamMember1 = teammate1.text
+                team?.teamMember2 = teammate2.text
+                team?.teamMember3 = teammate3.text
+                team?.teamMember4 = teammate4.text
+                // team?.createdAt = Date().timeIntervalSince1970
+                
+            }
             
-            //set team
-            team = newTeam
+            
+            
+            
+            //pop view controller
+            _ = navigationController?.popViewController(animated: true)
+            
         }
         
-        if team == team {
-            //configure Team
-            team?.teamName = teamName.text
-            team?.teamCaptain = teamCaptain.text
-            team?.teamMember1 = teammate1.text
-            team?.teamMember2 = teammate2.text
-            team?.teamMember3 = teammate3.text
-            team?.teamMember4 = teammate4.text
-           // team?.createdAt = Date().timeIntervalSince1970
-
-        }
-        
-        
-        //pop view controller
-        _ = navigationController?.popViewController(animated: true)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -95,7 +126,7 @@ class AddGameViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        scrollView.setContentOffset(CGPoint.init(x: 0, y: 200), animated: true)
+        scrollView.setContentOffset(CGPoint.init(x: 0, y: 250), animated: true)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
