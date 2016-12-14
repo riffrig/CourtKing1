@@ -11,6 +11,8 @@ import CoreData
 
 class ReserveGameViewController: UIViewController {
     
+    @IBOutlet weak var crownView: UIView!
+    
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var messageLabel: UILabel!
@@ -25,6 +27,7 @@ class ReserveGameViewController: UIViewController {
     
     @IBOutlet weak var reserveGameButton: UIButton!
     
+    @IBOutlet weak var timeLabel: UITextView!
     private let persistentContainer = NSPersistentContainer(name: "CourtKing")
     
     private let segueAddGameViewController = "SegueAddGameViewController"
@@ -83,6 +86,9 @@ class ReserveGameViewController: UIViewController {
         tableView.reloadData()
         tableView.allowsSelection = false
         vsButton.isEnabled = false
+        team1Button.isEnabled = false
+        team2Button.isEnabled = false
+        crownView.isHidden = true
         
         //Add logo in the top left corner of the navigation bar
         let button = UIButton.init(type: .custom)
@@ -235,11 +241,13 @@ class ReserveGameViewController: UIViewController {
        if (indexPath.row == 0)
         {
             team1Button.setTitle(cell.teamName.text, for: .normal)
+            //messageLabel.text = cell.teamName.text
         }
         
         if (indexPath.row == 1)
         {
             team2Button.setTitle(cell.teamName.text, for: .normal)
+            //messageLabel.text = cell.teamName.text
             
         }
         
@@ -251,6 +259,41 @@ class ReserveGameViewController: UIViewController {
             team2Button.reloadInputViews()
         }
         
+        if (indexPath.row < 1)
+        {
+            timeLabel.text = "Current Wait Time: 0 minutes"
+            timeLabel.reloadInputViews()
+        }
+            
+        else if (indexPath.row == 1)
+        {
+            timeLabel.text = "Current Wait Time: 12 minutes"
+        }
+        
+        else if (indexPath.row >= 2)
+        {
+            let waitingTeams = indexPath.row-2
+            if (waitingTeams == 0)
+            {
+                timeLabel.text = "Current Wait Time: 24 Minutes"
+            }
+                
+            else if (waitingTeams == 1)
+            {
+                timeLabel.text = "Current Wait Time: 36 Minutes"
+            }
+            else if (waitingTeams == 2)
+            {
+                timeLabel.text = "Current Wait Time: 48 Minutes"
+            }
+            else
+            {
+                timeLabel.text = "Current Wait Time: \(waitingTeams*12)"
+                print(waitingTeams*12)
+            }
+        }
+        
+        timeLabel.reloadInputViews()
        // team1Button.setTitle(team.teamName, for: .normal)
         //cell.dateCreated.text = DateInFormat
         
@@ -293,7 +336,55 @@ extension ReserveGameViewController: UITableViewDataSource {
     //trying to add slide options to declare winner of the game
     private func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
-        let declareWinner = UITableViewRowAction(style: .normal, title: "WINNER!") { action, index in print("Winner button tapped")
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReservationCell", for: indexPath as IndexPath) as? ReservationCell else {
+            fatalError("Unexpected Index Path")
+        }
+        
+        //print("cell team  = ", cell.teamLabel.text)
+        let declareWinner = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Declare Winner") { (action , indexPath ) -> Void in
+            self.isEditing = false
+            //self.viewTest.isHidden = false
+            print("Declare Winner button pressed")
+            
+           /* if let crown = UIImage(named: "crown.png") {
+                self.viewTest.backgroundColor = UIColor(patternImage: crown)
+                
+                UIView.animate(withDuration: 1.0, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                    // print("cell team label = " , cell.teamLabel.text)
+                    self.viewTest.alpha = 1.0
+                    self.messageLabel.text = cell.teamLabel.text
+                    self.messageLabel.textColor = UIColor.white
+                    tableView.isHidden = true
+                    self.team1Button.isHidden = true
+                    self.team2Button.isHidden = true
+                    self.mySegmentedControl.isHidden = true
+                    self.timeLabel.isHidden = true
+                    self.vsButton.isHidden = true
+                    self.messageLabel.isHidden = false
+                    super.view.backgroundColor = UIColor.black
+                }, completion: {
+                    (finished: Bool) -> Void in
+                    
+                    // Fade in
+                    UIView.animate(withDuration: 3.0, delay: 0.0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+                        self.viewTest.alpha = 0.0
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                            // your code here
+                            tableView.isHidden = false
+                            self.team1Button.isHidden = false
+                            self.team2Button.isHidden = false
+                            self.mySegmentedControl.isHidden = false
+                            self.timeLabel.isHidden = false
+                            self.vsButton.isHidden = false
+                            self.messageLabel.isHidden = false
+                        }
+                        //super.view.alpha = 1.0
+                        super.view.backgroundColor = UIColor(displayP3Red: 216/255, green: 170/255, blue: 9/255, alpha: 1.0)
+                    }, completion: nil)
+                })
+            }*/
+            
+            
         }
         
         declareWinner.backgroundColor = UIColor.blue
@@ -400,12 +491,53 @@ extension ReserveGameViewController: NSFetchedResultsControllerDelegate {
             
         case .delete:
             if let indexPath = indexPath {
+               /* if let crown = UIImage(named: "crown.png") {
+                    self.crownView.backgroundColor = UIColor(patternImage: crown)
+                    self.crownView.isHidden = false
+                    
+                    UIView.animate(withDuration: 1.0, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                        // print("cell team label = " , cell.teamLabel.text)
+                        self.crownView.alpha = 1.0
+                        //self.messageLabel.text = cell.teamLabel.text
+                        self.messageLabel.textColor = UIColor.white
+                        self.tableView.isHidden = true
+                        self.team1Button.isHidden = true
+                        self.team2Button.isHidden = true
+                        self.mySegmentedControl.isHidden = true
+                        self.timeLabel.isHidden = true
+                        self.vsButton.isHidden = true
+                        self.messageLabel.isHidden = false
+                        super.view.backgroundColor = UIColor.black
+                    }, completion: {
+                        (finished: Bool) -> Void in
+                        
+                        // Fade in
+                        UIView.animate(withDuration: 3.0, delay: 0.0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+                            self.crownView.alpha = 0.0
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                                // your code here
+                                self.tableView.isHidden = false
+                                self.team1Button.isHidden = false
+                                self.team2Button.isHidden = false
+                                self.mySegmentedControl.isHidden = false
+                                self.timeLabel.isHidden = false
+                                self.vsButton.isHidden = false
+                                self.messageLabel.isHidden = false
+                            }
+                            //super.view.alpha = 1.0
+                            super.view.backgroundColor = UIColor(displayP3Red: 216/255, green: 170/255, blue: 9/255, alpha: 1.0)
+                        }, completion: nil)
+                    })
+                }*/
+
+                
+                messageLabel.isHidden = false
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 tableView.reloadData()
                 team1Button.reloadInputViews()
                 team2Button.reloadInputViews()
                 
-            }
+           }
             break
             
         case .move:

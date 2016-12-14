@@ -126,7 +126,19 @@ class AddGameViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        scrollView.setContentOffset(CGPoint.init(x: 0, y: 250), animated: true)
+        
+        if(textField == teamName || textField == teamCaptain)
+        {
+            scrollView.setContentOffset(CGPoint.init(x:0, y: 100), animated: true)
+        }
+            
+            
+            //if (textField == teammate3 || textField == teammate4 || textField == teammate2 )
+        else
+        {
+            scrollView.setContentOffset(CGPoint.init(x: 0, y: 250), animated: true)
+        }
+
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {

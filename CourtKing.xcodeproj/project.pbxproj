@@ -12,6 +12,8 @@
 		670A92C21DD16C2B0022D3B7 /* AddGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670A92C11DD16C2A0022D3B7 /* AddGameViewController.swift */; };
 		6723EF0D1DC8DC150001B8AD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6723EF0C1DC8DC150001B8AD /* LoginViewController.swift */; };
 		674220AC1DC967B900276E2A /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 674220AB1DC967B900276E2A /* logo.jpg */; };
+		6777AA171DF5EE7000A9B97B /* arc.png in Resources */ = {isa = PBXBuildFile; fileRef = 6777AA161DF5EE7000A9B97B /* arc.png */; };
+		6777AA191DF5FCE900A9B97B /* crown.png in Resources */ = {isa = PBXBuildFile; fileRef = 6777AA181DF5FCE900A9B97B /* crown.png */; };
 		67ABFCC21DC83B5900B9B77F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67ABFCC11DC83B5900B9B77F /* AppDelegate.swift */; };
 		67ABFCCA1DC83B5900B9B77F /* CourtKing.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 67ABFCC81DC83B5900B9B77F /* CourtKing.xcdatamodeld */; };
 		67ABFCCC1DC83B5900B9B77F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67ABFCCB1DC83B5900B9B77F /* Assets.xcassets */; };
@@ -46,6 +48,8 @@
 		670A92C11DD16C2A0022D3B7 /* AddGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGameViewController.swift; sourceTree = "<group>"; };
 		6723EF0C1DC8DC150001B8AD /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		674220AB1DC967B900276E2A /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.jpg; sourceTree = "<group>"; };
+		6777AA161DF5EE7000A9B97B /* arc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arc.png; path = ../../../../Desktop/arc.png; sourceTree = "<group>"; };
+		6777AA181DF5FCE900A9B97B /* crown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = crown.png; path = ../../../../Desktop/crown.png; sourceTree = "<group>"; };
 		67ABFCBE1DC83B5900B9B77F /* CourtKing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CourtKing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67ABFCC11DC83B5900B9B77F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		67ABFCC91DC83B5900B9B77F /* CourtKing.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CourtKing.xcdatamodel; sourceTree = "<group>"; };
@@ -117,6 +121,8 @@
 				67ABFCCB1DC83B5900B9B77F /* Assets.xcassets */,
 				67ABFCCD1DC83B5900B9B77F /* LaunchScreen.storyboard */,
 				67ABFCD01DC83B5900B9B77F /* Info.plist */,
+				6777AA181DF5FCE900A9B97B /* crown.png */,
+				6777AA161DF5EE7000A9B97B /* arc.png */,
 				674220AB1DC967B900276E2A /* logo.jpg */,
 				6723EF0C1DC8DC150001B8AD /* LoginViewController.swift */,
 				670A92BD1DD1617A0022D3B7 /* ReserveGameViewController.swift */,
@@ -257,7 +263,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				674220AC1DC967B900276E2A /* logo.jpg in Resources */,
+				6777AA171DF5EE7000A9B97B /* arc.png in Resources */,
 				67ABFCCF1DC83B5900B9B77F /* LaunchScreen.storyboard in Resources */,
+				6777AA191DF5FCE900A9B97B /* crown.png in Resources */,
 				67ABFCCC1DC83B5900B9B77F /* Assets.xcassets in Resources */,
 				67DA5F9F1DED3A31002A1A25 /* Main.storyboard in Resources */,
 			);
